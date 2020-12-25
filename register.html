@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刘圆圆的作业</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
+
+  <script src="./js/index.js"></script>
+  <script src="./layui/layui.js"></script>
+
+  <script>
+    function saveUser(user) {
+      if (user) {
+        sessionStorage.setItem(user.username, user.password)
+      }
+    }
+
+    function presentMsg(msg) {
+      layui.use('layer', () => {
+        layer = layui.layer
+
+        layer.msg(msg)
+      })
+    }
+
+    function clear(form) {
+      form.val('registForm', {
+        'username': '',
+        'password1': '',
+        'password': '',
+        'email': ''
+      })
+    }
+
+    layui.use('form', function () {
+      var form = layui.form
+
+
+      form.on('submit(formDemo)', function (data) {
+        console.log(data.field)
+        var pwd = data.field.password
+        var pwd1 = data.field.password1
+        
+        if (pwd != pwd1) {
+          presentMsg('两次密码不一致!')
+          return false
+        }
+        saveUser(data.field)
+        presentMsg('注册成功，请进行登陆')
+        clear(form)
+        return false 
+      })
+
+    });
+  </script>
+</head>
+
+<body>
+
+
+
+  <div class="container">
+    <div class="layui-row top">
+      <div class="layui-col-md9">
+        <a href="./callbackpwd.html" class="callback-pwd">找回密码</a> |
+        <a href="./login.html">登陆</a>
+      </div>
+
+    </div>
+
+    <div class="content">
+      <h2 class="title">Register Page</h2>
+      <form method="POST" lay-filter="registForm" class="layui-form">
+        <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span style="color: red; margin-right: 3px;">*</span>用户名：</label>
+          <div class="layui-input-inline">
+            <input type="text" name="username" lay-verify="required" placeholder="请输入用户名" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span style="color: red; margin-right: 3px;">*</span>密码：</label>
+          <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span style="color: red; margin-right: 3px;">*</span>重复密码：</label>
+          <div class="layui-input-inline">
+            <input type="password" type="text" lay-verify="required" name="password1" placeholder="请再次输入密码"
+              autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span style="color: red; margin-right: 3px;">*</span>邮箱：</label>
+          <div class="layui-input-inline">
+            <input type="email" name="email" lay-verify="required|email" lay-verify="email" placeholder="请输入邮箱"
+              autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button type="button" class="layui-btn" lay-submit lay-filter="formDemo">注册</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+
+  </div>
+
+
+
+</body>
+
+</html>

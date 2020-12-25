@@ -1,0 +1,38 @@
+html,
+body {
+  background-color: rgba(245, 193, 20, 0.1);
+}
+
+.container {
+  width: 1080px;
+  margin: 50px auto;
+  border: 1px solid rgba(245, 193, 20, 0.3);
+  border-radius: 2%;
+  padding: 30px;
+}
+.container .top .callback-pwd {
+  color: rgb(18, 157, 175);
+}
+
+.container .content {
+  width: 580px;
+  border: 1px solid #eee;
+  margin: 0 auto;
+  padding: 3px 0;
+}
+.container .content .title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+/* 
+index.html
+*/
+.content {
+  margin: 0 auto;
+}
+
+.content .msg {
+  color: red;
+}
